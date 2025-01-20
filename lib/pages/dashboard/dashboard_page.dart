@@ -41,20 +41,64 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Text(
                     'Bem-vindo, Agricultor!',
                     style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                 ),
                 Text(
-                  AuthService().currentUser!.name,
+                  AuthService().currentUser?.name ?? 'Sem Nome',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
+                SizedBox(height: 10),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'Propriedade',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AuthService().currentUser?.property ?? '',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'Matrícula',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AuthService().currentUser?.register ?? '00000-00',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),

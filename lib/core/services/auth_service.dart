@@ -14,6 +14,7 @@ class AuthService {
     await _secureStorage.write(key: 'name', value: user.name);
     await _secureStorage.write(key: 'email', value: user.email);
     await _secureStorage.write(key: 'register', value: user.register);
+    await _secureStorage.write(key: 'property', value: user.property);
   }
 
   Future<void> _clearUserFromCache() async {
@@ -25,6 +26,7 @@ class AuthService {
     String? name = await _secureStorage.read(key: 'name');
     String? email = await _secureStorage.read(key: 'email');
     String? register = await _secureStorage.read(key: 'register');
+    String? property = await _secureStorage.read(key: 'property');
 
     if (id != null
         // && token != null
@@ -34,6 +36,7 @@ class AuthService {
         name: name ?? '',
         email: email ?? '',
         register: register ?? '',
+        property: property ?? '',
       );
     }
 
@@ -60,10 +63,12 @@ class AuthService {
     // );
 
     _currentUser = User(
-        id: '1',
-        email: 'agricultor@teste.com.br',
-        name: 'Lucas Villarinho',
-        register: '25789-DF');
+      id: '1',
+      email: 'agricultor@teste.com.br',
+      name: 'Kaio de Goes Sousa',
+      register: '25789-DF',
+      property: 'Fazenda Goes',
+    );
     // if (Platform.isIOS) {
     //   Purchases.logIn(_currentUser!.id);
     // }
