@@ -14,7 +14,7 @@ validatorPassword(value, {bool? loginValid}) {
   }
 
   if (loginValid != null && !loginValid) {
-    return 'CPF/Senha inválido';
+    return 'Dados inválidos, por favor verifique e tente novamente';
   }
   return null;
 }

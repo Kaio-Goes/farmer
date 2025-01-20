@@ -1,3 +1,4 @@
 import 'package:flutter/material.dart';
 
-const colorTertiary = Color.fromRGBO(52, 70, 147, 1);
+const colorPrimaty = Color.fromRGBO(218, 205, 93, 1);
+const colorTertiary = Color.fromRGBO(52, 147, 103, 1);

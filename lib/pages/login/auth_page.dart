@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:farmer/core/models/auth_form_data.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/core/utilities/validations.dart';
+import 'package:farmer/pages/dashboard/dashboard_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {
@@ -38,6 +39,19 @@ class _AuthPageState extends State<AuthPage>
     try {
       if (!mounted) return;
       setState(() => isLoading = true);
+
+      if (_authFormData.email.text == "agricultor@teste.com.br" &&
+          _authFormData.password.text == "123456") {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const DashboardPage(),
+          ),
+        );
+      } else {
+        setState(() {
+          loginValid = false;
+        });
+      }
     } on SocketException {
       _showError(
           'Sem conexão com a internet. Verifique sua rede e tente novamente.');
@@ -127,7 +141,7 @@ class _AuthPageState extends State<AuthPage>
                                         value,
                                         loginValid: loginValid),
                                   ),
-                                  const SizedBox(height: 15),
+                                  const SizedBox(height: 25),
                                   // const ResetPasswordCard(),
                                   ElevatedButton(
                                     onPressed: () {
