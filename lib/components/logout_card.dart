@@ -1,3 +1,4 @@
+import 'package:farmer/core/services/auth_service.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/pages/login/auth_page.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ logoutCard(BuildContext context) {
               padding: const EdgeInsets.symmetric(horizontal: 30),
             ),
             onPressed: () async {
-              // await AuthRailsService().logout();
+              await AuthService().logout();
 
               // ignore: use_build_context_synchronously
               // ignore: use_build_context_synchronously

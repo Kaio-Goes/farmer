@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:farmer/core/models/auth_form_data.dart';
+import 'package:farmer/core/services/auth_service.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/core/utilities/validations.dart';
 import 'package:farmer/pages/dashboard/dashboard_page.dart';
@@ -42,11 +43,14 @@ class _AuthPageState extends State<AuthPage>
 
       if (_authFormData.email.text == "agricultor@teste.com.br" &&
           _authFormData.password.text == "123456") {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const DashboardPage(),
-          ),
-        );
+        AuthService().login("agricultor@teste.com.br", '123456').then((_) {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const DashboardPage(),
+            ),
+          );
+        });
       } else {
         setState(() {
           loginValid = false;

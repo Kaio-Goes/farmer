@@ -1,4 +1,5 @@
 import 'package:farmer/components/on_selected_popup.dart';
+import 'package:farmer/core/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -19,18 +20,42 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Theme.of(context).primaryColor,
         actions: const [OnSelectedPopup(isDashboardPage: true)],
       ),
-      body: Stack(
+      body: Column(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            height: MediaQuery.of(context).size.height * 0.28,
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.center,
                 colors: [
-                  const Color.fromARGB(255, 158, 206, 82),
-                  Color.fromRGBO(255, 255, 255, 1),
+                  Theme.of(context).primaryColor,
+                  const Color.fromARGB(255, 142, 223, 122),
                 ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    'Bem-vindo, Agricultor!',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Text(
+                  AuthService().currentUser!.name,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
