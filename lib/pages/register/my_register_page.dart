@@ -6,14 +6,14 @@ import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/pages/register/create_register_page.dart';
 import 'package:flutter/material.dart';
 
-class MyRegister extends StatefulWidget {
-  const MyRegister({super.key});
+class MyRegisterPage extends StatefulWidget {
+  const MyRegisterPage({super.key});
 
   @override
-  State<MyRegister> createState() => _MyRegisterState();
+  State<MyRegisterPage> createState() => _MyRegisterPageState();
 }
 
-class _MyRegisterState extends State<MyRegister> {
+class _MyRegisterPageState extends State<MyRegisterPage> {
   List<Institution> listInstitution = [];
   Institution? selectedInstitution;
   List<TrackingForm> formInstitution = [];

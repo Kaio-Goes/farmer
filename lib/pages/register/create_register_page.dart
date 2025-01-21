@@ -1,9 +1,15 @@
+import 'dart:math';
+
 import 'package:farmer/components/on_selected_popup.dart';
 import 'package:farmer/core/models/institution.dart';
+import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/core/services/auth_service.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/core/utilities/text_fields.dart';
 import 'package:farmer/core/utilities/validations.dart';
+import 'package:farmer/pages/register/my_register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
 import 'package:flutter_multi_formatter/formatters/money_input_enums.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -34,6 +40,61 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
     if (!isValid) {
       return;
     }
+
+    listForm.add(
+      TrackingForm(
+        id: Random().nextInt(200).toString(),
+        institutionId: widget.institution.id,
+        userId: AuthService().currentUser!.id,
+        nameProduct: productNameController.text,
+        unitValue: double.parse(unitValueController.text
+                .replaceAll('.', '')
+                .replaceAll(',', '.'))
+            .toString(),
+        totalValue: double.parse(totalValueController.text
+                .replaceAll('.', '')
+                .replaceAll(',', '.'))
+            .toString(),
+        quantity: int.parse(quantityController.text),
+        productCulture: productCulture!,
+        numlot: lotController.text,
+        manufacturingDate: manufacturingDateController.text,
+        invoice: invoiceController.text,
+        dateInvoice: dateInvoiceController.text,
+        weight: weightValueController.text,
+        createdAt: DateTime.now().toString(),
+      ),
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Rastreio criado com sucesso!'),
+          content: Text(
+              'Foi criado um formulário de rastreio, para emitir um etiqueta é necessário vincular'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const MyRegisterPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                elevation: 3,
+                backgroundColor: colorPrimaty,
+              ),
+              child: const Text(
+                "Meus rastreios",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -254,15 +315,27 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                 ]),
                             SizedBox(height: 15),
                             modernTextFormField(
-                                controller: quantityController,
-                                validator: (value) => validatorName(value),
-                                hint: 'Digite a quantidade',
-                                label: 'Quantidade',
-                                textInputType:
-                                    TextInputType.numberWithOptions()),
+                              controller: quantityController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor, insira uma quantidade.';
+                                }
+                                if (int.tryParse(value) == null) {
+                                  return 'A quantidade deve ser um número válido.';
+                                }
+                                return null;
+                              },
+                              hint: 'Digite a quantidade',
+                              label: 'Quantidade',
+                              textInputType:
+                                  const TextInputType.numberWithOptions(),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                            ),
                             SizedBox(height: 15),
                             modernTextFormField(
-                                controller: totalValueController,
+                                controller: weightValueController,
                                 validator: (value) => validatorMoney(value),
                                 textInputType:
                                     TextInputType.numberWithOptions(),

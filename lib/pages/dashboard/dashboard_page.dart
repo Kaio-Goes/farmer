@@ -2,7 +2,7 @@ import 'package:farmer/components/card_icon.dart';
 import 'package:farmer/components/on_selected_popup.dart';
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/services/auth_service.dart';
-import 'package:farmer/pages/register/my_register.dart';
+import 'package:farmer/pages/register/my_register_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -160,7 +160,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => const MyRegister()),
+                                builder: (context) => const MyRegisterPage()),
                           );
                         },
                       ),

@@ -40,11 +40,9 @@ class CardTrackingForm extends StatelessWidget {
             Text('Cultura: ${form.productCulture}'),
             Text('Quantidade: ${form.quantity}'),
             Text('Lote: ${form.numlot}'),
-            Text(
-                'Date de Fabricação: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.manufacturingDate))}'),
+            Text('Date de Fabricação: ${form.manufacturingDate}'),
             Text('Nota Fiscal: ${form.invoice}'),
-            Text(
-                'Data emissão da NF: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.manufacturingDate))}'),
+            Text('Data emissão da NF: ${form.manufacturingDate}'),
             Text('Peso (kg): ${form.weight}'),
             Text(
                 'Valor Unidade: ${formatCurrency.format(double.parse(form.unitValue))}'),
