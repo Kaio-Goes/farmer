@@ -1,3 +1,4 @@
+import 'package:farmer/components/card_tracking_form.dart';
 import 'package:farmer/components/on_selected_popup.dart';
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
@@ -64,6 +65,10 @@ class _MyRegisterState extends State<MyRegister> {
 
   @override
   Widget build(BuildContext context) {
+    final filteredForms = formInstitution
+        .where((form) => form.institutionId == selectedInstitution?.id)
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -74,96 +79,111 @@ class _MyRegisterState extends State<MyRegister> {
         backgroundColor: Theme.of(context).primaryColor,
         actions: const [OnSelectedPopup()],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.21,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).primaryColor,
-                    const Color.fromARGB(255, 142, 223, 122),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            children: [
+              Container(
+                height: constraints.maxHeight * 0.25,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).primaryColor,
+                      const Color.fromARGB(255, 142, 223, 122),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Propriedade',
-                          style: TextStyle(
-                            color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Propriedade',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                selectedInstitution?.responsibleName ?? '',
-                                style: const TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  selectedInstitution?.responsibleName ?? '',
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            PopupMenuButton<Institution>(
-                              icon: const Icon(
-                                Icons.more_vert,
-                                color: Colors.white,
+                              PopupMenuButton<Institution>(
+                                icon: const Icon(
+                                  Icons.more_vert,
+                                  color: Colors.white,
+                                ),
+                                onSelected: _onPropertySelected,
+                                itemBuilder: (BuildContext context) {
+                                  return listInstitution.map((institution) {
+                                    return PopupMenuItem<Institution>(
+                                      value: institution,
+                                      child: Text(institution.responsibleName),
+                                    );
+                                  }).toList();
+                                },
                               ),
-                              onSelected: _onPropertySelected,
-                              itemBuilder: (BuildContext context) {
-                                return listInstitution.map((institution) {
-                                  return PopupMenuItem<Institution>(
-                                    value: institution,
-                                    child: Text(institution.responsibleName),
-                                  );
-                                }).toList();
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          'CNPJ',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          selectedInstitution?.cnpj ?? '',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            ],
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Quantidades',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          '$selectedInstitutionCount',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )
-                      ],
+                          const SizedBox(height: 5),
+                          const Text(
+                            'CNPJ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            selectedInstitution?.cnpj ?? '',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          const Text(
+                            'Quantidades',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            '$selectedInstitutionCount',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: ListView.builder(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                  itemCount: filteredForms.length,
+                  itemBuilder: (context, index) {
+                    final form = filteredForms[index];
+                    return CardTrackingForm(form: form);
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

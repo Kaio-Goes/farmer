@@ -9,19 +9,20 @@ class TrackingForm {
   late String manufacturingDate;
   late String invoice;
   late String weight;
+  late String createdAt;
 
-  TrackingForm({
-    required this.id,
-    required this.institutionId,
-    required this.userId,
-    required this.nameProduct,
-    required this.quantity,
-    required this.productCulture,
-    required this.numlot,
-    required this.manufacturingDate,
-    required this.invoice,
-    required this.weight,
-  });
+  TrackingForm(
+      {required this.id,
+      required this.institutionId,
+      required this.userId,
+      required this.nameProduct,
+      required this.quantity,
+      required this.productCulture,
+      required this.numlot,
+      required this.manufacturingDate,
+      required this.invoice,
+      required this.weight,
+      required this.createdAt});
 }
 
 List<TrackingForm> listForm = [
@@ -36,6 +37,7 @@ List<TrackingForm> listForm = [
     manufacturingDate: DateTime.now().toString(),
     invoice: '123456789012345',
     weight: '75',
+    createdAt: '2025-01-20 08:40',
   ),
   TrackingForm(
     id: '2',
@@ -48,6 +50,7 @@ List<TrackingForm> listForm = [
     manufacturingDate: DateTime.now().toString(),
     invoice: '123456789343443',
     weight: '1000.00',
+    createdAt: '2025-01-20 08:40',
   ),
   TrackingForm(
     id: '3',
@@ -60,5 +63,6 @@ List<TrackingForm> listForm = [
     manufacturingDate: DateTime.now().toString(),
     invoice: '12345678901455',
     weight: '1200.00',
+    createdAt: '2025-01-20 08:40',
   ),
 ];
