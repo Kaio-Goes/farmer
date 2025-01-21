@@ -5,24 +5,29 @@ class TrackingForm {
   late String nameProduct;
   late int quantity;
   late String productCulture;
+  late String unitValue;
+  late String totalValue;
   late String numlot;
   late String manufacturingDate;
   late String invoice;
   late String weight;
   late String createdAt;
 
-  TrackingForm(
-      {required this.id,
-      required this.institutionId,
-      required this.userId,
-      required this.nameProduct,
-      required this.quantity,
-      required this.productCulture,
-      required this.numlot,
-      required this.manufacturingDate,
-      required this.invoice,
-      required this.weight,
-      required this.createdAt});
+  TrackingForm({
+    required this.id,
+    required this.institutionId,
+    required this.userId,
+    required this.nameProduct,
+    required this.unitValue,
+    required this.totalValue,
+    required this.quantity,
+    required this.productCulture,
+    required this.numlot,
+    required this.manufacturingDate,
+    required this.invoice,
+    required this.weight,
+    required this.createdAt,
+  });
 }
 
 List<TrackingForm> listForm = [
@@ -31,6 +36,8 @@ List<TrackingForm> listForm = [
     institutionId: '1',
     userId: '1',
     nameProduct: 'Tomate Cereja',
+    unitValue: 'R\$ 1,50',
+    totalValue: 'R\$ 45950,00',
     quantity: 5000,
     productCulture: 'Tomate',
     numlot: '00150',
@@ -44,6 +51,8 @@ List<TrackingForm> listForm = [
     institutionId: '1',
     userId: '1',
     nameProduct: 'Morango Nordeste',
+    unitValue: 'R\$ 2,50',
+    totalValue: 'R\$ 64950,00',
     quantity: 15000,
     productCulture: 'Morango',
     numlot: '00151',
@@ -57,6 +66,8 @@ List<TrackingForm> listForm = [
     institutionId: '2',
     userId: '1',
     nameProduct: 'Banana Nanica',
+    unitValue: 'R\$ 0,50',
+    totalValue: 'R\$ 22950,00',
     quantity: 2500,
     productCulture: 'Banana',
     numlot: '00152',

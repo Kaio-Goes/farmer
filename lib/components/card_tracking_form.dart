@@ -42,6 +42,8 @@ class CardTrackingForm extends StatelessWidget {
                 'Date de Fabricação: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.manufacturingDate))}'),
             Text('Nota Fiscal: ${form.invoice}'),
             Text('Peso (kg): ${form.weight}'),
+            Text('Valor Unidade: ${form.unitValue}'),
+            Text('Valor Total: ${form.totalValue}'),
             SizedBox(height: 5),
             Text(
               'Formulário criado no dia ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.createdAt))}',
