@@ -20,11 +20,21 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String? productCulture;
   TextEditingController productNameController = TextEditingController();
-  TextEditingController unitValue = TextEditingController();
-
+  TextEditingController unitValueController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  TextEditingController totalValueController = TextEditingController();
+  TextEditingController weightValueController = TextEditingController();
   TextEditingController lotController = TextEditingController();
   TextEditingController manufacturingDateController = TextEditingController();
+  TextEditingController invoiceController = TextEditingController();
+  TextEditingController dateInvoiceController = TextEditingController();
+
+  void _submit() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (!isValid) {
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +240,7 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                             ),
                             SizedBox(height: 15),
                             modernTextFormField(
-                                controller: unitValue,
+                                controller: unitValueController,
                                 validator: (value) => validatorMoney(value),
                                 textInputType:
                                     TextInputType.numberWithOptions(),
@@ -250,6 +260,34 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                 label: 'Quantidade',
                                 textInputType:
                                     TextInputType.numberWithOptions()),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                                controller: totalValueController,
+                                validator: (value) => validatorMoney(value),
+                                textInputType:
+                                    TextInputType.numberWithOptions(),
+                                hint: 'Exemplo: 250.00',
+                                label: 'Peso (KG)',
+                                inputFormatters: [
+                                  CurrencyInputFormatter(
+                                    thousandSeparator: ThousandSeparator.Period,
+                                    mantissaLength: 2,
+                                  )
+                                ]),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                                controller: totalValueController,
+                                validator: (value) => validatorMoney(value),
+                                textInputType:
+                                    TextInputType.numberWithOptions(),
+                                hint: 'Exemplo: R\$ 1000,00',
+                                label: 'Valor Total',
+                                inputFormatters: [
+                                  CurrencyInputFormatter(
+                                    thousandSeparator: ThousandSeparator.Period,
+                                    mantissaLength: 2,
+                                  )
+                                ]),
                             SizedBox(height: 15),
                             modernTextFormField(
                               controller: lotController,
@@ -272,6 +310,45 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                 )
                               ],
                             ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: invoiceController,
+                              validator: (value) => validatorName(value),
+                              hint: 'Digite o Nº da Nota Fiscal',
+                              label: 'Nota Fiscal',
+                            ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: dateInvoiceController,
+                              validator: (value) => validatorDate(value),
+                              hint: 'Digite a data 01/01/2025',
+                              label: 'Data de Emissão da NF',
+                              textInputType: TextInputType.numberWithOptions(),
+                              inputFormatters: [
+                                MaskTextInputFormatter(
+                                  mask: '##/##/####',
+                                  filter: {"#": RegExp(r'^[0-9]*$')},
+                                  type: MaskAutoCompletionType.lazy,
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 15),
+                            Center(
+                              child: ElevatedButton(
+                                onPressed: _submit,
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 5,
+                                  backgroundColor: colorTertiary,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 45),
+                                ),
+                                child: const Text(
+                                  'Cadastrar',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 40)
                           ],
                         ),
                       ),
