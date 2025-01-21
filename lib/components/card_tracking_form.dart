@@ -8,6 +8,8 @@ class CardTrackingForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'pt_BR');
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -41,9 +43,13 @@ class CardTrackingForm extends StatelessWidget {
             Text(
                 'Date de Fabricação: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.manufacturingDate))}'),
             Text('Nota Fiscal: ${form.invoice}'),
+            Text(
+                'Data emissão da NF: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.manufacturingDate))}'),
             Text('Peso (kg): ${form.weight}'),
-            Text('Valor Unidade: ${form.unitValue}'),
-            Text('Valor Total: ${form.totalValue}'),
+            Text(
+                'Valor Unidade: ${formatCurrency.format(double.parse(form.unitValue))}'),
+            Text(
+                'Valor Total: ${formatCurrency.format(double.parse(form.totalValue))}'),
             SizedBox(height: 5),
             Text(
               'Formulário criado no dia ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.createdAt))}',

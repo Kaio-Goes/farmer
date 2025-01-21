@@ -32,3 +32,41 @@ validatorEmail(value) {
 
   return null;
 }
+
+validatorName(value) {
+  final name = value ?? '';
+  if (name.trim().length < 2) {
+    return 'Nome deve ter no mínimo 2 caracteres';
+  }
+  return null;
+}
+
+validatorDropdown(value) {
+  if (value == null) {
+    return 'Selecione uma das opções';
+  }
+  return null;
+}
+
+validatorDate(value) {
+  final name = value ?? '';
+  if (name.trim().length < 10) {
+    return 'Data inválida';
+  }
+  return null;
+}
+
+validatorMoney(value) {
+  if (value == null || value.isEmpty) {
+    return 'Por favor, digite um valor.';
+  }
+
+  const pattern = r'^\d{1,3}(\.\d{3})*(,\d{2})?$';
+  final regExp = RegExp(pattern);
+
+  if (!regExp.hasMatch(value)) {
+    return 'Por favor, digite um valor válido.';
+  }
+
+  return null;
+}

@@ -142,6 +142,7 @@ class _MyRegisterState extends State<MyRegister> {
         .toList();
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 142, 223, 122),
       appBar: AppBar(
         title: const Text(
           'Meus Registros',
@@ -167,94 +168,106 @@ class _MyRegisterState extends State<MyRegister> {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Propriedade',
-                            style: TextStyle(
-                              color: Colors.white,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Propriedade',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  selectedInstitution?.responsibleName ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    selectedInstitution?.responsibleName ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              PopupMenuButton<Institution>(
-                                icon: const Icon(
-                                  Icons.more_vert,
-                                  color: Colors.white,
+                                PopupMenuButton<Institution>(
+                                  icon: const Icon(
+                                    Icons.more_vert,
+                                    color: Colors.white,
+                                  ),
+                                  onSelected: _onPropertySelected,
+                                  itemBuilder: (BuildContext context) {
+                                    return listInstitution.map((institution) {
+                                      return PopupMenuItem<Institution>(
+                                        value: institution,
+                                        child:
+                                            Text(institution.responsibleName),
+                                      );
+                                    }).toList();
+                                  },
                                 ),
-                                onSelected: _onPropertySelected,
-                                itemBuilder: (BuildContext context) {
-                                  return listInstitution.map((institution) {
-                                    return PopupMenuItem<Institution>(
-                                      value: institution,
-                                      child: Text(institution.responsibleName),
-                                    );
-                                  }).toList();
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 5),
-                          const Text(
-                            'CNPJ',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            selectedInstitution?.cnpj ?? '',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Quantidades $selectedInstitutionCount',
-                                  style: TextStyle(color: Colors.white),
+                            const SizedBox(height: 5),
+                            const Text(
+                              'CNPJ',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              selectedInstitution?.cnpj ?? '',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Quantidades $selectedInstitutionCount',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.add, color: Colors.white),
-                                onPressed: _showSelectInstitutionDialog,
-                              ),
-                            ],
-                          ),
-                        ],
+                                IconButton(
+                                  icon: const Icon(Icons.add,
+                                      color: Colors.white),
+                                  onPressed: _showSelectInstitutionDialog,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
-                  itemCount: filteredForms.length,
-                  itemBuilder: (context, index) {
-                    final form = filteredForms[index];
-                    return CardTrackingForm(form: form);
-                  },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).canvasColor,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                    itemCount: filteredForms.length,
+                    itemBuilder: (context, index) {
+                      final form = filteredForms[index];
+                      return CardTrackingForm(form: form);
+                    },
+                  ),
                 ),
               ),
             ],
