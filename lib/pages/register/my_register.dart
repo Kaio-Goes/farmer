@@ -2,6 +2,7 @@ import 'package:farmer/components/card_tracking_form.dart';
 import 'package:farmer/components/on_selected_popup.dart';
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/pages/register/create_register_page.dart';
 import 'package:flutter/material.dart';
 
 class MyRegister extends StatefulWidget {
@@ -28,6 +29,10 @@ class _MyRegisterState extends State<MyRegister> {
         responsibleCpf: '123.456.789-10',
         email: 'agricultor@teste.com.br',
         phone: '(61) 99376-3638',
+        cep: '73081-605',
+        logradouro: 'Qms 33A Lote 08 Setor de Mansoes Sobradinho-DF',
+        lat: '-15.798598',
+        long: '-47.921226',
       ),
       Institution(
         id: '2',
@@ -36,6 +41,10 @@ class _MyRegisterState extends State<MyRegister> {
         responsibleCpf: '123.456.789-10',
         email: 'agricultor@teste.com.br',
         phone: '61 99376-3638',
+        cep: '72041-45',
+        logradouro: '202 Asa Sul Brasília DF',
+        lat: '-15.798488',
+        long: '-47.924826',
       )
     ];
 
@@ -153,15 +162,37 @@ class _MyRegisterState extends State<MyRegister> {
                             ),
                           ),
                           const SizedBox(height: 5),
-                          const Text(
-                            'Quantidades',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            '$selectedInstitutionCount',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Quantidades $selectedInstitutionCount',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              PopupMenuButton<int>(
+                                icon: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                                onSelected: (value) {
+                                  switch (value) {
+                                    case 0:
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CreateRegisterPage()),
+                                      );
+                                  }
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  const PopupMenuItem<int>(
+                                    value: 0,
+                                    child: Text('Criar Formulário'),
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),

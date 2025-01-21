@@ -5,6 +5,10 @@ class Institution {
   late String responsibleCpf;
   late String email;
   late String phone;
+  late String cep;
+  late String logradouro;
+  late String lat;
+  late String long;
 
   Institution({
     required this.id,
@@ -13,14 +17,9 @@ class Institution {
     required this.responsibleCpf,
     required this.email,
     required this.phone,
+    required this.cep,
+    required this.logradouro,
+    required this.lat,
+    required this.long,
   });
-
-  Institution.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    responsibleName = json['responsible_name'];
-    cnpj = json['cnpj'];
-    responsibleCpf = json['responsible_cpf'];
-    email = json['email'];
-    phone = json['phone'];
-  }
 }

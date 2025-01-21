@@ -26,6 +26,10 @@ class _DashboardPageState extends State<DashboardPage> {
         responsibleCpf: '123.456.789-10',
         email: 'agricultor@teste.com.br',
         phone: '(61) 99376-3638',
+        cep: '73081-605',
+        logradouro: 'Qms 33A Lote 08 Setor de Mansoes Sobradinho-DF',
+        lat: '-15.798598',
+        long: '-47.921226',
       ),
       Institution(
         id: '2',
@@ -34,6 +38,10 @@ class _DashboardPageState extends State<DashboardPage> {
         responsibleCpf: '123.456.789-10',
         email: 'agricultor@teste.com.br',
         phone: '61 99376-3638',
+        cep: '72041-45',
+        logradouro: '202 Asa Sul Brasília DF',
+        lat: '-15.798488',
+        long: '-47.924826',
       )
     ];
   }
