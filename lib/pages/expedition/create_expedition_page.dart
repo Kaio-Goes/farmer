@@ -122,7 +122,7 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
                     );
                   },
                   child: const Text(
-                    "Ir a Meus Registros",
+                    "Ir a Formulário de Rastreio",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

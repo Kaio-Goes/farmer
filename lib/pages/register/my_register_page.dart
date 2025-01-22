@@ -145,7 +145,7 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
       backgroundColor: const Color.fromARGB(255, 142, 223, 122),
       appBar: AppBar(
         title: const Text(
-          'Meus Registros',
+          'Formulário de Rastreio',
           style: TextStyle(color: Colors.white),
         ),
         foregroundColor: Colors.white,

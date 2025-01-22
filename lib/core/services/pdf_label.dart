@@ -40,19 +40,7 @@ void generatePdf(
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
                   child: pw.Text(
-                      'Produzido:\nNome: ${form.nameProduct}\nCNPJ: ${institution.cnpj}\nEndereço: ${institution.logradouro}\nCoordenadas: [${institution.lat}, ${institution.long}]\nTEL: ${institution.phone}'),
-                ),
-                pw.Padding(
-                  padding: const pw.EdgeInsets.all(8.0),
-                  child: pw.Text(
                       'Varejista:\nNome: ${form.ratailerCorporateName ?? 'N/A'}\nCNPJ: ${form.cnpjCorparateName}\nEndereço: ${form.adresssCorporate}\nCoordenadas: [${form.lat},${form.long}]\nTEL: ${form.phone}'),
-                ),
-              ]),
-              pw.TableRow(children: [
-                pw.Padding(
-                  padding: const pw.EdgeInsets.all(8.0),
-                  child:
-                      pw.Text('Data de entrega: ${form.dateInvoice ?? 'N/A'}'),
                 ),
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
@@ -65,6 +53,34 @@ void generatePdf(
                       height: 50,
                     ),
                   ),
+                ),
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(8.0),
+                  child: pw.Text(
+                      'Produzido:\nNome: ${form.nameProduct}\nCNPJ: ${institution.cnpj}\nEndereço: ${institution.logradouro}\nCoordenadas: [${institution.lat}, ${institution.long}]\nTEL: ${institution.phone}'),
+                ),
+
+                /// adicioanr qrCode fake
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(8.0),
+                  child: pw.Container(
+                    height: 100,
+                    child: pw.BarcodeWidget(
+                      barcode: Barcode.qrCode(),
+                      data: 'QRCode Fake - ${form.cnpjCorparateName ?? 'N/A'}',
+                      width: double.infinity,
+                      height: 100,
+                    ),
+                  ),
+                ),
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: const pw.EdgeInsets.all(8.0),
+                  child:
+                      pw.Text('Data de entrega: ${form.dateInvoice ?? 'N/A'}'),
                 ),
               ]),
               pw.TableRow(children: [

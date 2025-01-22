@@ -85,7 +85,7 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                     backgroundColor: colorPrimaty,
                   ),
                   child: const Text(
-                    "Meus rastreios",
+                    "Formulário de Rastreio",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -150,7 +150,7 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                   backgroundColor: colorPrimaty,
                 ),
                 child: const Text(
-                  "Meus rastreios",
+                  "Formulário de Rastreio",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

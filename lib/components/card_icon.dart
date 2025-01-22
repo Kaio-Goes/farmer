@@ -31,6 +31,7 @@ class CardIcon extends StatelessWidget {
               SizedBox(height: 20),
               Text(
                 textIcon,
+                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],

@@ -65,15 +65,15 @@ class CardTrackingForm extends StatelessWidget {
               Text('Empresa: ${form.ratailerCorporateName}'),
               if (form.cnpjCorparateName != null)
                 Text('CNPJ: ${form.cnpjCorparateName}'),
-              if (form.adresssCorporate != null)
-                Text('Endereço: ${form.adresssCorporate}'),
-              if (form.lat != null && form.long != null)
-                Text('Coordenadas: [${form.lat}, ${form.long}]'),
-              if (form.phone != null) Text('Telefone: ${form.phone}'),
-              if (form.numlot != null) Text('Lote: ${form.numlot}'),
+              // if (form.adresssCorporate != null)
+              //   Text('Endereço: ${form.adresssCorporate}'),
+              // if (form.lat != null && form.long != null)
+              //   Text('Coordenadas: [${form.lat}, ${form.long}]'),
+              // if (form.phone != null) Text('Telefone: ${form.phone}'),
+              // if (form.numlot != null) Text('Lote: ${form.numlot}'),
               if (form.invoice != null) Text('Nota Fiscal: ${form.invoice}'),
-              if (form.dateInvoice != null)
-                Text('Data emissão da NF: ${form.dateInvoice}'),
+              // if (form.dateInvoice != null)
+              //   Text('Data emissão da NF: ${form.dateInvoice}'),
               if (form.unitValue != null)
                 Text(
                     'Valor Unidade: ${formatCurrency.format(double.parse(form.unitValue!))}'),

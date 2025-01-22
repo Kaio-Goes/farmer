@@ -130,7 +130,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CardIcon(
-                        textIcon: 'Meus Registros',
+                        textIcon: 'Formulários de Rastreio',
                         iconItem: Icons.agriculture,
                         onTap: () {
                           Navigator.of(context).push(
@@ -141,8 +141,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       const SizedBox(width: 16),
                       CardIcon(
-                        textIcon: 'Card 2',
-                        iconItem: Icons.local_florist,
+                        textIcon: 'Propriedades',
+                        iconItem: Icons.business_outlined,
                         onTap: () {},
                       ),
                     ],
@@ -152,14 +152,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CardIcon(
-                        textIcon: 'Card 3',
-                        iconItem: Icons.folder_zip_outlined,
+                        textIcon: 'Diário de Campo',
+                        iconItem: Icons.agriculture_rounded,
                         onTap: () {},
                       ),
                       const SizedBox(width: 16),
                       CardIcon(
-                        textIcon: 'Card 4',
-                        iconItem: Icons.folder_zip_outlined,
+                        textIcon: 'Culturas',
+                        iconItem: Icons.local_florist,
                         onTap: () {},
                       ),
                     ],
