@@ -1,5 +1,6 @@
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/pages/expedition/create_expedition_page.dart';
 import 'package:farmer/pages/register/create_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -126,11 +127,16 @@ class CardTrackingForm extends StatelessWidget {
                           ? Icons.post_add_outlined
                           : Icons.edit_document),
                       title: Text(form.ratailerCorporateName == null
-                          ? 'Criar Expedição'
+                          ? 'Adicionar Expedição'
                           : 'Editar Expedição'),
                       onTap: () {
-                        // Ação para editar
-                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => CreateExpeditionPage(
+                              trackingForm: form,
+                            ),
+                          ),
+                        );
                       },
                     ),
                     ListTile(

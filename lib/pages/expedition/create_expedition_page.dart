@@ -8,6 +8,7 @@ import 'package:farmer/pages/register/my_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
 import 'package:flutter_multi_formatter/formatters/money_input_enums.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CreateExpeditionPage extends StatefulWidget {
@@ -35,6 +36,34 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
     institution = listIstitution
         .where((form) => form.id == widget.trackingForm.institutionId)
         .toList();
+
+    if (widget.trackingForm.ratailerCorporateName != null) {
+      editRequest();
+    }
+  }
+
+  void editRequest() {
+    final numberFormat = NumberFormat.currency(
+      locale: 'pt_BR',
+      symbol: '',
+      decimalDigits: 2,
+    );
+
+    ratailerCorporateNameController.text =
+        widget.trackingForm.ratailerCorporateName!;
+    lotController.text = widget.trackingForm.numlot!;
+    unitValueController.text = numberFormat
+        .format(
+          double.parse(widget.trackingForm.unitValue!),
+        )
+        .trim();
+    totalValueController.text = numberFormat
+        .format(
+          double.parse(widget.trackingForm.totalValue!),
+        )
+        .trim();
+    invoiceController.text = widget.trackingForm.invoice!;
+    dateInvoiceController.text = widget.trackingForm.dateInvoice!;
   }
 
   void _submit() async {
@@ -91,8 +120,10 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 142, 223, 122),
       appBar: AppBar(
-        title: const Text(
-          'Adicionar Expedição',
+        title: Text(
+          widget.trackingForm.ratailerCorporateName != null
+              ? 'Editar Expedição'
+              : 'Adicionar Expedição',
           style: TextStyle(color: Colors.white),
         ),
         foregroundColor: Colors.white,
@@ -312,8 +343,11 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 45),
                                 ),
-                                child: const Text(
-                                  'Cadastrar',
+                                child: Text(
+                                  widget.trackingForm.ratailerCorporateName !=
+                                          null
+                                      ? 'Editar'
+                                      : 'Cadastrar',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),

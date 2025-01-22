@@ -59,7 +59,7 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
     }
 
     if (widget.trackingForm != null) {
-      widget.trackingForm!.productCulture = productNameController.text;
+      widget.trackingForm!.productCulture = productCulture!;
       widget.trackingForm!.nameProduct = productNameController.text;
       widget.trackingForm!.quantity = int.parse(quantityController.text);
       widget.trackingForm!.weight = weightValueController.text;
