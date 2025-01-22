@@ -7,6 +7,7 @@ import 'package:farmer/core/services/auth_service.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/core/utilities/text_fields.dart';
 import 'package:farmer/core/utilities/validations.dart';
+import 'package:farmer/pages/expedition/create_expedition_page.dart';
 import 'package:farmer/pages/register/my_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,30 +42,19 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
       return;
     }
 
-    listForm.add(
-      TrackingForm(
-        id: Random().nextInt(200).toString(),
-        institutionId: widget.institution.id,
-        userId: AuthService().currentUser!.id,
-        nameProduct: productNameController.text,
-        unitValue: double.parse(unitValueController.text
-                .replaceAll('.', '')
-                .replaceAll(',', '.'))
-            .toString(),
-        totalValue: double.parse(totalValueController.text
-                .replaceAll('.', '')
-                .replaceAll(',', '.'))
-            .toString(),
-        quantity: int.parse(quantityController.text),
-        productCulture: productCulture!,
-        numlot: lotController.text,
-        manufacturingDate: manufacturingDateController.text,
-        invoice: invoiceController.text,
-        dateInvoice: dateInvoiceController.text,
-        weight: weightValueController.text,
-        createdAt: DateTime.now().toString(),
-      ),
+    TrackingForm trancking = TrackingForm(
+      id: Random().nextInt(200).toString(),
+      institutionId: widget.institution.id,
+      userId: AuthService().currentUser!.id,
+      nameProduct: productNameController.text,
+      quantity: int.parse(quantityController.text),
+      productCulture: productCulture!,
+      manufacturingDate: manufacturingDateController.text,
+      weight: weightValueController.text,
+      createdAt: DateTime.now().toString(),
     );
+
+    listForm.add(trancking);
 
     showDialog(
       context: context,
@@ -88,6 +78,27 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
               ),
               child: const Text(
                 "Meus rastreios",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            TextButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 3,
+                backgroundColor: colorTertiary,
+              ),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => CreateExpeditionPage(
+                      trackingForm: trancking,
+                    ),
+                  ),
+                );
+              },
+              child: const Text(
+                "Adicionar Expedição",
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -299,20 +310,20 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                               hint: 'Digite o nome do produto',
                               label: 'Nome do Produto',
                             ),
-                            SizedBox(height: 15),
-                            modernTextFormField(
-                                controller: unitValueController,
-                                validator: (value) => validatorMoney(value),
-                                textInputType:
-                                    TextInputType.numberWithOptions(),
-                                hint: 'Exemplo: R\$ 1000,00',
-                                label: 'Valor Unidade',
-                                inputFormatters: [
-                                  CurrencyInputFormatter(
-                                    thousandSeparator: ThousandSeparator.Period,
-                                    mantissaLength: 2,
-                                  )
-                                ]),
+                            // SizedBox(height: 15),
+                            // modernTextFormField(
+                            //     controller: unitValueController,
+                            //     validator: (value) => validatorMoney(value),
+                            //     textInputType:
+                            //         TextInputType.numberWithOptions(),
+                            //     hint: 'Exemplo: R\$ 1000,00',
+                            //     label: 'Valor Unidade',
+                            //     inputFormatters: [
+                            //       CurrencyInputFormatter(
+                            //         thousandSeparator: ThousandSeparator.Period,
+                            //         mantissaLength: 2,
+                            //       )
+                            //     ]),
                             SizedBox(height: 15),
                             modernTextFormField(
                               controller: quantityController,
@@ -347,27 +358,27 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                     mantissaLength: 2,
                                   )
                                 ]),
-                            SizedBox(height: 15),
-                            modernTextFormField(
-                                controller: totalValueController,
-                                validator: (value) => validatorMoney(value),
-                                textInputType:
-                                    TextInputType.numberWithOptions(),
-                                hint: 'Exemplo: R\$ 1000,00',
-                                label: 'Valor Total',
-                                inputFormatters: [
-                                  CurrencyInputFormatter(
-                                    thousandSeparator: ThousandSeparator.Period,
-                                    mantissaLength: 2,
-                                  )
-                                ]),
-                            SizedBox(height: 15),
-                            modernTextFormField(
-                              controller: lotController,
-                              validator: (value) => validatorName(value),
-                              hint: 'Digite o lote',
-                              label: 'Lote',
-                            ),
+                            // SizedBox(height: 15),
+                            // modernTextFormField(
+                            //     controller: totalValueController,
+                            //     validator: (value) => validatorMoney(value),
+                            //     textInputType:
+                            //         TextInputType.numberWithOptions(),
+                            //     hint: 'Exemplo: R\$ 1000,00',
+                            //     label: 'Valor Total',
+                            //     inputFormatters: [
+                            //       CurrencyInputFormatter(
+                            //         thousandSeparator: ThousandSeparator.Period,
+                            //         mantissaLength: 2,
+                            //       )
+                            //     ]),
+                            // SizedBox(height: 15),
+                            // modernTextFormField(
+                            //   controller: lotController,
+                            //   validator: (value) => validatorName(value),
+                            //   hint: 'Digite o lote',
+                            //   label: 'Lote',
+                            // ),
                             SizedBox(height: 15),
                             modernTextFormField(
                               controller: manufacturingDateController,
@@ -383,28 +394,28 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                 )
                               ],
                             ),
-                            SizedBox(height: 15),
-                            modernTextFormField(
-                              controller: invoiceController,
-                              validator: (value) => validatorName(value),
-                              hint: 'Digite o Nº da Nota Fiscal',
-                              label: 'Nota Fiscal',
-                            ),
-                            SizedBox(height: 15),
-                            modernTextFormField(
-                              controller: dateInvoiceController,
-                              validator: (value) => validatorDate(value),
-                              hint: 'Digite a data 01/01/2025',
-                              label: 'Data de Emissão da NF',
-                              textInputType: TextInputType.numberWithOptions(),
-                              inputFormatters: [
-                                MaskTextInputFormatter(
-                                  mask: '##/##/####',
-                                  filter: {"#": RegExp(r'^[0-9]*$')},
-                                  type: MaskAutoCompletionType.lazy,
-                                )
-                              ],
-                            ),
+                            // SizedBox(height: 15),
+                            // modernTextFormField(
+                            //   controller: invoiceController,
+                            //   validator: (value) => validatorName(value),
+                            //   hint: 'Digite o Nº da Nota Fiscal',
+                            //   label: 'Nota Fiscal',
+                            // ),
+                            // SizedBox(height: 15),
+                            // modernTextFormField(
+                            //   controller: dateInvoiceController,
+                            //   validator: (value) => validatorDate(value),
+                            //   hint: 'Digite a data 01/01/2025',
+                            //   label: 'Data de Emissão da NF',
+                            //   textInputType: TextInputType.numberWithOptions(),
+                            //   inputFormatters: [
+                            //     MaskTextInputFormatter(
+                            //       mask: '##/##/####',
+                            //       filter: {"#": RegExp(r'^[0-9]*$')},
+                            //       type: MaskAutoCompletionType.lazy,
+                            //     )
+                            //   ],
+                            // ),
                             SizedBox(height: 15),
                             Center(
                               child: ElevatedButton(

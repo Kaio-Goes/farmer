@@ -39,20 +39,34 @@ class CardTrackingForm extends StatelessWidget {
           children: [
             Text('Cultura: ${form.productCulture}'),
             Text('Quantidade: ${form.quantity}'),
-            Text('Lote: ${form.numlot}'),
             Text('Date de Fabricação: ${form.manufacturingDate}'),
-            Text('Nota Fiscal: ${form.invoice}'),
-            Text('Data emissão da NF: ${form.manufacturingDate}'),
             Text('Peso (kg): ${form.weight}'),
-            Text(
-                'Valor Unidade: ${formatCurrency.format(double.parse(form.unitValue))}'),
-            Text(
-                'Valor Total: ${formatCurrency.format(double.parse(form.totalValue))}'),
-            SizedBox(height: 5),
             Text(
               'Formulário criado no dia ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse(form.createdAt))}',
               style: TextStyle(color: Colors.grey),
-            )
+            ),
+            if (form.ratailerCorporateName != null) ...[
+              SizedBox(height: 10),
+              Text(
+                'Dados de expedição',
+                style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15),
+              ),
+              Text('Empresa: ${form.ratailerCorporateName}'),
+              if (form.numlot != null) Text('Lote: ${form.numlot}'),
+              if (form.invoice != null) Text('Nota Fiscal: ${form.invoice}'),
+              if (form.dateInvoice != null)
+                Text('Data emissão da NF: ${form.dateInvoice}'),
+              if (form.unitValue != null)
+                Text(
+                    'Valor Unidade: ${formatCurrency.format(double.parse(form.unitValue!))}'),
+              if (form.totalValue != null)
+                Text(
+                    'Valor Total: ${formatCurrency.format(double.parse(form.totalValue!))}'),
+            ],
+            SizedBox(height: 5),
           ],
         ),
       ),

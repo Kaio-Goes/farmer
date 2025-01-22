@@ -5,12 +5,13 @@ class TrackingForm {
   late String nameProduct;
   late int quantity;
   late String productCulture;
-  late String unitValue;
-  late String totalValue;
-  late String numlot;
+  late String? unitValue;
+  late String? totalValue;
+  late String? numlot;
   late String manufacturingDate;
-  late String invoice;
-  late String dateInvoice;
+  late String? ratailerCorporateName;
+  late String? invoice;
+  late String? dateInvoice;
   late String weight;
   late String createdAt;
 
@@ -19,14 +20,15 @@ class TrackingForm {
     required this.institutionId,
     required this.userId,
     required this.nameProduct,
-    required this.unitValue,
-    required this.totalValue,
+    this.unitValue,
+    this.totalValue,
     required this.quantity,
     required this.productCulture,
-    required this.numlot,
+    this.numlot,
     required this.manufacturingDate,
-    required this.invoice,
-    required this.dateInvoice,
+    this.ratailerCorporateName,
+    this.invoice,
+    this.dateInvoice,
     required this.weight,
     required this.createdAt,
   });
@@ -42,6 +44,7 @@ List<TrackingForm> listForm = [
     totalValue: '45950.00',
     quantity: 5000,
     productCulture: 'Tomate',
+    ratailerCorporateName: 'Spezi Tecnologia',
     numlot: '00150',
     manufacturingDate: '21/01/2025',
     invoice: '123456789012345',
@@ -54,14 +57,9 @@ List<TrackingForm> listForm = [
     institutionId: '1',
     userId: '1',
     nameProduct: 'Morango Nordeste',
-    unitValue: '2.50',
-    totalValue: '64950.00',
     quantity: 15000,
     productCulture: 'Morango',
-    numlot: '00151',
     manufacturingDate: '21/01/2025',
-    invoice: '123456789343443',
-    dateInvoice: '21/01/2025',
     weight: '1000.00',
     createdAt: '2025-01-20 08:40',
   ),
@@ -70,14 +68,9 @@ List<TrackingForm> listForm = [
     institutionId: '2',
     userId: '1',
     nameProduct: 'Banana Nanica',
-    unitValue: '0.50',
-    totalValue: '22950.00',
     quantity: 2500,
     productCulture: 'Banana',
-    numlot: '00152',
     manufacturingDate: '21/01/2025',
-    invoice: '12345678901455',
-    dateInvoice: '21/01/2025',
     weight: '1200.00',
     createdAt: '2025-01-20 08:40',
   ),
