@@ -1,7 +1,9 @@
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/pages/expedition/create_expedition_page.dart';
 import 'package:farmer/pages/register/create_register_page.dart';
+import 'package:farmer/pages/register/my_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -146,8 +148,55 @@ class CardTrackingForm extends StatelessWidget {
                       ),
                       title: const Text('Excluir'),
                       onTap: () {
-                        // Ação para excluir
-                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Tem certeza?'),
+                              content:
+                                  const Text('Você realmente deseja excluir?'),
+                              actions: [
+                                TextButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 3,
+                                    backgroundColor: colorPrimaty,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text(
+                                    'Cancelar',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                TextButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 3,
+                                    backgroundColor: colorTertiary,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                  ),
+                                  onPressed: () async {
+                                    listForm.removeWhere(
+                                        (item) => item.id == form.id);
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MyRegisterPage()),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Confirmar',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                     ),
                   ],
