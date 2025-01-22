@@ -265,7 +265,10 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                     itemCount: filteredForms.length,
                     itemBuilder: (context, index) {
                       final form = filteredForms[index];
-                      return CardTrackingForm(form: form);
+                      return CardTrackingForm(
+                        form: form,
+                        institution: selectedInstitution!,
+                      );
                     },
                   ),
                 ),

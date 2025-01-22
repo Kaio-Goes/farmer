@@ -1,10 +1,14 @@
+import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/pages/register/create_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CardTrackingForm extends StatelessWidget {
   final TrackingForm form;
-  const CardTrackingForm({super.key, required this.form});
+  final Institution institution;
+  const CardTrackingForm(
+      {super.key, required this.form, required this.institution});
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +72,83 @@ class CardTrackingForm extends StatelessWidget {
             ],
             SizedBox(height: 5),
           ],
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.more_vert),
+          onPressed: () {
+            // Adicione aqui a funcionalidade desejada para o botão
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(Icons.library_add_check,
+                          color: form.ratailerCorporateName == null
+                              ? Colors.grey
+                              : Colors.black),
+                      title: Text(
+                        'Gerar Etiqueta',
+                        style: TextStyle(
+                            color: form.ratailerCorporateName == null
+                                ? Colors.grey
+                                : Colors.black),
+                      ),
+                      subtitle: form.ratailerCorporateName == null
+                          ? Text(
+                              'Para gerar Etiqueta é necessário ter uma expedição',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 12),
+                            )
+                          : null,
+                      onTap: () {
+                        if (form.ratailerCorporateName == null) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.edit),
+                      title: const Text('Editar Rastreamento'),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => CreateRegisterPage(
+                                    institution: institution,
+                                    trackingForm: form,
+                                  )),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(form.ratailerCorporateName == null
+                          ? Icons.post_add_outlined
+                          : Icons.edit_document),
+                      title: Text(form.ratailerCorporateName == null
+                          ? 'Criar Expedição'
+                          : 'Editar Expedição'),
+                      onTap: () {
+                        // Ação para editar
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                      title: const Text('Excluir'),
+                      onTap: () {
+                        // Ação para excluir
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
         ),
       ),
     );

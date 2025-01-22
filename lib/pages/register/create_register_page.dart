@@ -17,7 +17,9 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CreateRegisterPage extends StatefulWidget {
   final Institution institution;
-  const CreateRegisterPage({super.key, required this.institution});
+  final TrackingForm? trackingForm;
+  const CreateRegisterPage(
+      {super.key, required this.institution, this.trackingForm});
 
   @override
   State<CreateRegisterPage> createState() => _CreateRegisterPageState();
@@ -31,76 +33,153 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
   TextEditingController weightValueController = TextEditingController();
   TextEditingController manufacturingDateController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.trackingForm != null) {
+      editRequest();
+    }
+  }
+
+  void editRequest() async {
+    setState(() {
+      productCulture = widget.trackingForm!.productCulture;
+      productNameController.text = widget.trackingForm!.nameProduct;
+      quantityController.text = widget.trackingForm!.quantity.toString();
+      weightValueController.text = widget.trackingForm!.weight;
+      manufacturingDateController.text = widget.trackingForm!.manufacturingDate;
+    });
+  }
+
   void _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
       return;
     }
 
-    TrackingForm trancking = TrackingForm(
-      id: Random().nextInt(200).toString(),
-      institutionId: widget.institution.id,
-      userId: AuthService().currentUser!.id,
-      nameProduct: productNameController.text,
-      quantity: int.parse(quantityController.text),
-      productCulture: productCulture!,
-      manufacturingDate: manufacturingDateController.text,
-      weight: weightValueController.text,
-      createdAt: DateTime.now().toString(),
-    );
+    if (widget.trackingForm != null) {
+      widget.trackingForm!.productCulture = productNameController.text;
+      widget.trackingForm!.nameProduct = productNameController.text;
+      widget.trackingForm!.quantity = int.parse(quantityController.text);
+      widget.trackingForm!.weight = weightValueController.text;
+      widget.trackingForm!.manufacturingDate = manufacturingDateController.text;
 
-    listForm.add(trancking);
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Rastreio criado com sucesso!'),
-          content: Text(
-              'Foi criado um formulário de rastreio, para emitir um etiqueta é necessário vincular'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const MyRegisterPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                elevation: 3,
-                backgroundColor: colorPrimaty,
-              ),
-              child: const Text(
-                "Meus rastreios",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            TextButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 3,
-                backgroundColor: colorTertiary,
-              ),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => CreateExpeditionPage(
-                      trackingForm: trancking,
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Rastreio atualizado com sucesso!'),
+              content: Text('Foi atualizado o formulário de rastreio'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => const MyRegisterPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 3,
+                    backgroundColor: colorPrimaty,
+                  ),
+                  child: const Text(
+                    "Meus rastreios",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                if (widget.trackingForm!.ratailerCorporateName == null)
+                  TextButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 3,
+                      backgroundColor: colorTertiary,
+                    ),
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => CreateExpeditionPage(
+                            trackingForm: widget.trackingForm!,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Adicionar Expedição",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                );
-              },
-              child: const Text(
-                "Adicionar Expedição",
-                style: TextStyle(color: Colors.white),
+              ],
+            );
+          });
+    } else {
+      TrackingForm trancking = TrackingForm(
+        id: Random().nextInt(200).toString(),
+        institutionId: widget.institution.id,
+        userId: AuthService().currentUser!.id,
+        nameProduct: productNameController.text,
+        quantity: int.parse(quantityController.text),
+        productCulture: productCulture!,
+        manufacturingDate: manufacturingDateController.text,
+        weight: weightValueController.text,
+        createdAt: DateTime.now().toString(),
+      );
+
+      listForm.add(trancking);
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Rastreio criado com sucesso!'),
+            content: Text(
+                'Foi criado um formulário de rastreio, para emitir um etiqueta é necessário vincular'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const MyRegisterPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: 3,
+                  backgroundColor: colorPrimaty,
+                ),
+                child: const Text(
+                  "Meus rastreios",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-          ],
-        );
-      },
-    );
+              TextButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 3,
+                  backgroundColor: colorTertiary,
+                ),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => CreateExpeditionPage(
+                        trackingForm: trancking,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Adicionar Expedição",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -272,6 +351,8 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                 const DropdownMenuItem(
                                     value: 'Tomate', child: Text('Tomate')),
                                 const DropdownMenuItem(
+                                    value: 'Morango', child: Text('Morango')),
+                                const DropdownMenuItem(
                                     value: 'Soja', child: Text('Soja')),
                               ],
                               autovalidateMode:
@@ -364,8 +445,10 @@ class _CreateRegisterPageState extends State<CreateRegisterPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 45),
                                 ),
-                                child: const Text(
-                                  'Cadastrar',
+                                child: Text(
+                                  widget.trackingForm != null
+                                      ? 'Atualizar'
+                                      : 'Cadastrar',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
