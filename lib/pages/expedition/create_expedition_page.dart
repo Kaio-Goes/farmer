@@ -24,6 +24,11 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController ratailerCorporateNameController =
       TextEditingController();
+  TextEditingController cnpjCorporateNameController = TextEditingController();
+  TextEditingController adresssCorporateController = TextEditingController();
+  TextEditingController latController = TextEditingController();
+  TextEditingController longController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController lotController = TextEditingController();
   TextEditingController unitValueController = TextEditingController();
   TextEditingController totalValueController = TextEditingController();
@@ -51,6 +56,11 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
 
     ratailerCorporateNameController.text =
         widget.trackingForm.ratailerCorporateName!;
+    cnpjCorporateNameController.text = widget.trackingForm.cnpjCorparateName!;
+    adresssCorporateController.text = widget.trackingForm.adresssCorporate!;
+    latController.text = widget.trackingForm.lat!;
+    longController.text = widget.trackingForm.long!;
+    phoneController.text = widget.trackingForm.phone!;
     lotController.text = widget.trackingForm.numlot!;
     unitValueController.text = numberFormat
         .format(
@@ -74,6 +84,11 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
 
     widget.trackingForm.ratailerCorporateName =
         ratailerCorporateNameController.text;
+    widget.trackingForm.cnpjCorparateName = cnpjCorporateNameController.text;
+    widget.trackingForm.adresssCorporate = adresssCorporateController.text;
+    widget.trackingForm.lat = latController.text;
+    widget.trackingForm.long = longController.text;
+    widget.trackingForm.phone = phoneController.text;
     widget.trackingForm.numlot = lotController.text;
     widget.trackingForm.unitValue = double.parse(
             unitValueController.text.replaceAll('.', '').replaceAll(',', '.'))
@@ -276,6 +291,59 @@ class _CreateExpeditionPageState extends State<CreateExpeditionPage> {
                               hint: 'Digite o nome da  empresa',
                               label: 'Razão Social do Varejista',
                             ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: cnpjCorporateNameController,
+                              validator: (value) => validatorCnpj(value),
+                              hint: 'Digite o CNPJ da  empresa',
+                              label: 'CNPJ do Varejista',
+                              inputFormatters: [
+                                MaskTextInputFormatter(
+                                  mask: '##.###.###/####-##',
+                                  filter: {"#": RegExp(r'^[0-9]*$')},
+                                  type: MaskAutoCompletionType.lazy,
+                                )
+                              ],
+                              textInputType: TextInputType.numberWithOptions(),
+                            ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: adresssCorporateController,
+                              validator: (value) => validatorName(value),
+                              hint: 'Digite o Endereço da  empresa',
+                              label: 'Endereço',
+                            ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: latController,
+                              validator: (value) => validatorName(value),
+                              hint: 'Digite a latitude da  empresa',
+                              label: 'Latitude',
+                              textInputType: TextInputType.numberWithOptions(),
+                            ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                              controller: longController,
+                              validator: (value) => validatorName(value),
+                              hint: 'Digite a longitude da  empresa',
+                              label: 'Longitude',
+                              textInputType: TextInputType.numberWithOptions(),
+                            ),
+                            SizedBox(height: 15),
+                            modernTextFormField(
+                                controller: phoneController,
+                                validator: (value) => validatorPhone(value),
+                                hint: 'Digite o telefone para contato ',
+                                label: 'Telefone',
+                                textInputType:
+                                    TextInputType.numberWithOptions(),
+                                inputFormatters: [
+                                  MaskTextInputFormatter(
+                                    mask: '(##) #####-####',
+                                    filter: {"#": RegExp(r'^[0-9]*$')},
+                                    type: MaskAutoCompletionType.lazy,
+                                  )
+                                ]),
                             SizedBox(height: 15),
                             modernTextFormField(
                               controller: lotController,

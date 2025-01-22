@@ -70,3 +70,31 @@ validatorMoney(value) {
 
   return null;
 }
+
+validatorCnpj(value) {
+  if (value!.isEmpty) {
+    return 'Por favor, digite seu CNPJ';
+  }
+
+  const pattern = r'^\d{2}\.\d{3}\.\d{3}/\d{4}\-\d{2}$';
+  final regExp = RegExp(pattern);
+
+  if (!regExp.hasMatch(value)) {
+    return 'Por favor, digite um CNPJ válido';
+  }
+
+  return null;
+}
+
+validatorPhone(value) {
+  if (value!.isEmpty) {
+    return 'Por favor, digite seu número';
+  }
+  const pattern = r'^\(\d{2}\) \d{5}\-\d{4}$';
+
+  final regExp = RegExp(pattern);
+
+  if (!regExp.hasMatch(value)) {
+    return 'Por favor, digite um número de telefone válido';
+  }
+}

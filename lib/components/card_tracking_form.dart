@@ -1,5 +1,6 @@
 import 'package:farmer/core/models/institution.dart';
 import 'package:farmer/core/models/tracking_form.dart';
+import 'package:farmer/core/services/pdf_label.dart';
 import 'package:farmer/core/utilities/styles_constants.dart';
 import 'package:farmer/pages/expedition/create_expedition_page.dart';
 import 'package:farmer/pages/register/create_register_page.dart';
@@ -62,6 +63,13 @@ class CardTrackingForm extends StatelessWidget {
                     fontSize: 15),
               ),
               Text('Empresa: ${form.ratailerCorporateName}'),
+              if (form.cnpjCorparateName != null)
+                Text('CNPJ: ${form.cnpjCorparateName}'),
+              if (form.adresssCorporate != null)
+                Text('Endereço: ${form.adresssCorporate}'),
+              if (form.lat != null && form.long != null)
+                Text('Coordenadas: [${form.lat}, ${form.long}]'),
+              if (form.phone != null) Text('Telefone: ${form.phone}'),
               if (form.numlot != null) Text('Lote: ${form.numlot}'),
               if (form.invoice != null) Text('Nota Fiscal: ${form.invoice}'),
               if (form.dateInvoice != null)
@@ -108,6 +116,8 @@ class CardTrackingForm extends StatelessWidget {
                       onTap: () {
                         if (form.ratailerCorporateName == null) {
                           Navigator.pop(context);
+                        } else {
+                          generatePdf(context, form, institution);
                         }
                       },
                     ),

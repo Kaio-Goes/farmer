@@ -10,6 +10,11 @@ class TrackingForm {
   late String? numlot;
   late String manufacturingDate;
   late String? ratailerCorporateName;
+  late String? cnpjCorparateName;
+  late String? adresssCorporate;
+  late String? lat;
+  late String? long;
+  late String? phone;
   late String? invoice;
   late String? dateInvoice;
   late String weight;
@@ -27,6 +32,11 @@ class TrackingForm {
     this.numlot,
     required this.manufacturingDate,
     this.ratailerCorporateName,
+    this.cnpjCorparateName,
+    this.adresssCorporate,
+    this.lat,
+    this.long,
+    this.phone,
     this.invoice,
     this.dateInvoice,
     required this.weight,
@@ -45,6 +55,12 @@ List<TrackingForm> listForm = [
     quantity: 5000,
     productCulture: 'Tomate',
     ratailerCorporateName: 'Spezi Tecnologia',
+    cnpjCorparateName: '06.119.012/0001-16',
+    adresssCorporate:
+        'Quadra08 Bloco B-50 Andar 8 Sala 810 Edif Venancio Shopping Asa Sul',
+    lat: '-15.798598',
+    long: '-47.921226',
+    phone: '(61) 99999-3638',
     numlot: '00150',
     manufacturingDate: '21/01/2025',
     invoice: '123456789012345',
