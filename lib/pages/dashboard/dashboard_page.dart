@@ -18,32 +18,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    listIstitution = [
-      Institution(
-        id: '1',
-        responsibleName: 'Fazenda Goes',
-        cnpj: '24.653.218/0001-03',
-        responsibleCpf: '123.456.789-10',
-        email: 'agricultor@teste.com.br',
-        phone: '(61) 99376-3638',
-        cep: '73081-605',
-        logradouro: 'Qms 33A Lote 08 Setor de Mansoes Sobradinho-DF',
-        lat: '-15.798598',
-        long: '-47.921226',
-      ),
-      Institution(
-        id: '2',
-        responsibleName: 'Fazenda Feliz',
-        cnpj: '05.346.557/0001-00',
-        responsibleCpf: '123.456.789-10',
-        email: 'agricultor@teste.com.br',
-        phone: '61 99376-3638',
-        cep: '72041-45',
-        logradouro: '202 Asa Sul Brasília DF',
-        lat: '-15.798488',
-        long: '-47.924826',
-      )
-    ];
+    listIstitution;
   }
 
   @override
