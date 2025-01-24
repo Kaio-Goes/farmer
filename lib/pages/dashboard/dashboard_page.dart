@@ -153,7 +153,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       CardIcon(
                         textIcon: 'Diário de Campo',
-                        iconItem: Icons.agriculture_rounded,
+                        iconItem: Icons.align_horizontal_center,
                         onTap: () {},
                       ),
                       const SizedBox(width: 16),

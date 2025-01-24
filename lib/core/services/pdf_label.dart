@@ -39,8 +39,42 @@ void generatePdf(
               pw.TableRow(children: [
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
-                  child: pw.Text(
-                      'Varejista:\nNome: ${form.ratailerCorporateName ?? 'N/A'}\nCNPJ: ${form.cnpjCorparateName}\nEndereço: ${form.adresssCorporate}\nCoordenadas: [${form.lat},${form.long}]\nTEL: ${form.phone}'),
+                  child: pw.RichText(
+                    text: pw.TextSpan(
+                      children: [
+                        pw.TextSpan(
+                          text: 'Varejista:\n',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(
+                          text: 'Nome: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(
+                            text: '${form.ratailerCorporateName ?? 'N/A'}\n'),
+                        pw.TextSpan(
+                          text: 'CNPJ: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${form.cnpjCorparateName}\n'),
+                        pw.TextSpan(
+                          text: 'Endereço: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${form.adresssCorporate}\n'),
+                        pw.TextSpan(
+                          text: 'Coordenadas: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '[${form.lat}, ${form.long}]\n'),
+                        pw.TextSpan(
+                          text: 'TEL: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${form.phone}'),
+                      ],
+                    ),
+                  ),
                 ),
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
@@ -58,8 +92,43 @@ void generatePdf(
               pw.TableRow(children: [
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
-                  child: pw.Text(
-                      'Produzido:\nNome: ${form.nameProduct}\nCNPJ: ${institution.cnpj}\nEndereço: ${institution.logradouro}\nCoordenadas: [${institution.lat}, ${institution.long}]\nTEL: ${institution.phone}'),
+                  child: pw.RichText(
+                    text: pw.TextSpan(
+                      children: [
+                        pw.TextSpan(
+                          text: 'Produzido:\n',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(
+                          text: 'Nome: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${form.nameProduct}\n'),
+                        pw.TextSpan(
+                          text: 'CNPJ: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${institution.cnpj}\n'),
+                        pw.TextSpan(
+                          text: 'Endereço: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: '${institution.logradouro}\n'),
+                        pw.TextSpan(
+                          text: 'Coordenadas: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(
+                            text:
+                                '[${institution.lat}, ${institution.long}]\n'),
+                        pw.TextSpan(
+                          text: 'TEL: ',
+                          style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.TextSpan(text: institution.phone),
+                      ],
+                    ),
+                  ),
                 ),
 
                 /// adicioanr qrCode fake
@@ -86,7 +155,7 @@ void generatePdf(
               pw.TableRow(children: [
                 pw.Padding(
                   padding: const pw.EdgeInsets.all(8.0),
-                  child: pw.Text('Autenticador: ${'N/A'}'),
+                  child: pw.Text('Autenticador: ${'63B0E24ACREX34'}'),
                 ),
                 pw.Container(), // Deixe vazio se não houver dados adicionais.
               ]),
