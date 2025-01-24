@@ -19,8 +19,8 @@ class CardIcon extends StatelessWidget {
       color: Colors.white,
       elevation: 2,
       child: SizedBox(
-        height: 200,
-        width: 150,
+        height: MediaQuery.of(context).size.height * 0.25,
+        width: MediaQuery.of(context).size.width * 0.4,
         child: InkWell(
           borderRadius: BorderRadius.circular(16.0),
           onTap: onTap,
@@ -29,10 +29,13 @@ class CardIcon extends StatelessWidget {
             children: [
               Icon(iconItem, size: 48, color: Colors.green),
               SizedBox(height: 20),
-              Text(
-                textIcon,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  textIcon,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

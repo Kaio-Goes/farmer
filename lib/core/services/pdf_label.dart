@@ -21,7 +21,7 @@ void generatePdf(
         children: [
           // Título
           pw.Text(
-            'Produto rastreado desde a produção',
+            'Produto rastreado desde a produção.',
             style: pw.TextStyle(
               fontSize: 16,
               fontWeight: pw.FontWeight.bold,
